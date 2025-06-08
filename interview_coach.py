@@ -1,30 +1,25 @@
-import requests
-import json
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
 
 class AIInterviewCoach:
-    def __init__(self, role_description, api_key, api_endpoint):
-        self.role_description = role_description
-        self.api_key = api_key
-        self.api_endpoint = api_endpoint
-        self.questions = []
+    def __init__(self, api_key):
+        load_dotenv()
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel("models/gemini-1.5-flash-latest")
 
-    def generate_questions(self, num_questions=5):
-        pass
-        
+    def generate_question(self): # Generates a single question
+        prompt = """Generate one insightful interview question for a candidate applying for a Software Engineer role. The question should assess problem-solving abilities."""
+        try:
+            response = self.model.generate_content(prompt)
+            return response.text.strip()
+        except Exception as e:
+            return f"Error generating question: {e}"
 
     def answer_question(self, question, answer):
-        pass
-
-    def _gemini_api_call(self, prompt):
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
-        }
-        data = {"prompt": prompt}  # Simplified data
+        prompt = f"""Evaluate the following candidate answer to an interview question. The question was: "{question}". The answer is: "{answer}". Provide constructive feedback on the answer, focusing on strengths and weaknesses, and suggest improvements. Consider the answer's clarity, completeness, and demonstration of problem-solving skills."""
         try:
-            response = requests.post(self.api_endpoint, headers=headers, data=json.dumps(data))
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.RequestException as e:
-            print(f"Error calling Gemini API: {e}")
-            return None
+            response = self.model.generate_content(prompt)
+            return response.text.strip()
+        except Exception as e:
+            return f"Error evaluating answer: {e}"

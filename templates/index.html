@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Interview Coach</title>
+    <link rel="stylesheet" href="/static/styles.css"> </head>
+<body>
+    <h1>AI Interview Coach</h1>
+    <div class="chat-container">
+        <div class="bot-message message">
+            {{ question }}
+        </div>
+        {% if feedback %}
+            <div class="bot-message message">
+                {{ feedback }}
+            </div>
+        {% endif %}
+    </div>
+
+    <form method="POST">
+        <textarea name="answer" rows="5" cols="50" placeholder="Type your answer here..."></textarea><br>
+        <button type="submit">Submit Answer</button>
+    </form>
+
+</body>
+</html>
