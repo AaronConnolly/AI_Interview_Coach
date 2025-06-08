@@ -1,25 +1,51 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Interview Coach</title>
-    <link rel="stylesheet" href="/static/styles.css"> </head>
-<body>
-    <h1>AI Interview Coach</h1>
-    <div class="chat-container">
-        <div class="bot-message message">
-            {{ question }}
+    <!-- Linking Google fonts Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- App Header -->
+      <header class="app-header">
+        <h1 class="heading">Hello, there</h1>
+        <h2 class="sub-heading">How can I help you?</h2>
+      </header>
+
+      <!-- Suggestionis List -->
+      <ul class="suggestions">
+        <li class="suggestions-item">
+          <p class="text">Help me prepare for a interview</p>
+          <span class="material-symbols-rounded"> draw </span>
+        </li>
+        <li class="suggestions-item">
+          <p class="text">Help me give better answers to interview questions</p>
+          <span class="material-symbols-rounded"> draw </span>
+        </li>
+      </ul>
+
+      <div class="prompt-container">
+        <div class="prompt-wrapper">
+          <form action="#" class="prompt-form">
+            <input type="text" placeholder="Ask Gemini" class="prompt-input" />
+            <div class="prompt-actions"></div>
+            <button id="send-prompt-btn" class="material-symbols-rounded">
+              arrow_upward
+            </button>
+          </form>
+          <button id="send-prompt-btn" class="material-symbols-rounded">
+            delete
+          </button>
         </div>
-        {% if feedback %}
-            <div class="bot-message message">
-                {{ feedback }}
-            </div>
-        {% endif %}
+        <p class="disclaimer-text"></p>
+      </div>
     </div>
-
-    <form method="POST">
-        <textarea name="answer" rows="5" cols="50" placeholder="Type your answer here..."></textarea><br>
-        <button type="submit">Submit Answer</button>
-    </form>
-
-</body>
+  </body>
 </html>
