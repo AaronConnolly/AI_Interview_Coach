@@ -1,29 +1,30 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from interview_coach import AIInterviewCoach
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-api_key = os.getenv("GOOGLE_API_KEY")
-if api_key is None:
-    print("Error: GOOGLE_API_KEY not found in .env file.")
-    exit(1)
+from response_templates import RESPONSE_TEMPLATES
 
 app = Flask(__name__)
-#Tell Flask where to find static files
 app.static_folder = 'static'
-coach = AIInterviewCoach(api_key=api_key)
-
-question = coach.generate_question()
-
+coach = AIInterviewCoach()  # Create the AIInterviewCoach instance
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    feedback = None
     if request.method == "POST":
-        answer = request.form.get("answer")
+        job_role = request.form["job_role"]
+        num_questions = int(request.form["num_questions"])
+        questions = coach.generate_questions(job_role, num_questions)
+        return jsonify({"questions": questions})
+    return render_template("index.html")
+
+@app.route("/get_feedback", methods=["POST"])
+def get_feedback():
+    data = request.get_json()
+    answer = data.get("answer")
+    question = data.get("question")
+    if question and answer:
         feedback = coach.answer_question(question, answer)
-    return render_template("index.html", question=question, feedback=feedback)
+        return jsonify({"feedback": feedback})
+    else:
+        return jsonify({"error": "Invalid request data"}), 400
 
 if __name__ == "__main__":
     app.run(debug=True)
