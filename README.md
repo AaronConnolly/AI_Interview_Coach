@@ -2,8 +2,9 @@
 
 This project is a web application that simulates an interview experience using the Google Gemini AI model.  It helps users practice answering interview questions and receive feedback on their responses.
 
-[![Screenshot 1](image1.png)](image1.png)
-[![Screenshot 2](image2.png)](image2.png)
+| Openinf Screen                     | Chat Screen                     |
+| :--------------------------------- | :--------------------------------- |
+| ![Screenshot 1](images/Interview_Coach_form.png)| ![Screenshot 2](images/Interview_Coach_Chat.png)|
 
 
 ## Features
