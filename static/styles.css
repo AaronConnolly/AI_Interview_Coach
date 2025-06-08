@@ -84,11 +84,20 @@ body {
 }
 
 .message {
-  padding: 10px 15px;
+  padding: 15px; /* Add padding inside the box */
   margin-bottom: 10px;
   border-radius: 10px;
   max-width: 80%; /* Ensure messages fit within the container */
-  word-break: break-word;
+  word-break: break-word; /* Break long words to prevent overflow */
+  overflow-wrap: break-word; /* Ensure text wraps properly */
+  box-sizing: border-box; /* Include padding and border in the element's width */
+  background-color: var(--secondary-color); /* Set background color */
+}
+
+.message ul {
+  padding-left: 20px; /* Add padding to align bullets inside the box */
+  margin: 0; /* Remove default margin */
+  list-style-position: inside; /* Ensure bullets are inside the border */
 }
 
 .user-message {
