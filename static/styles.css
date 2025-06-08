@@ -9,141 +9,133 @@
 }
 
 :root {
-  /* Dark theme colors */
-  --text-color: #edf3ff;
-  --subheading-color: #97a7ca;
-  --placeholder-color: #c3cdde;
-  --primary-color: #101623;
-  --secondary-color: #283045;
-  --secondary-hover-color: #333e58;
+  --primary-color: #1e1e1e; /* Dark background */
+  --secondary-color: #282c34; /* Slightly lighter dark gray */
+  --text-color: #d6d6d6; /* Light gray text */
+  --accent-color: #61afef; /* Blue accent color */
 }
 
 body {
+  background-color: var(--primary-color);
   color: var(--text-color);
-  background: var(--primary-color);
-}
-
-.container {
-  padding: 32px 0 60px;
 }
 
 #initial-form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  padding: 20px;
+  height: 100vh; /* Full viewport height */
 }
 
 #initial-form {
-  width: 100%;
-  max-width: 400px;
-  background: var(--secondary-color);
+  width: 300px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #initial-form h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
   text-align: center;
-  color: var(--text-color);
+  margin-bottom: 20px;
 }
 
 #initial-form label {
   display: block;
-  margin-bottom: 10px;
-  color: var(--subheading-color);
+  margin-bottom: 5px;
 }
 
 #initial-form input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid var(--placeholder-color);
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   color: var(--text-color);
 }
 
 #initial-form button {
-  width: 100%;
-  padding: 10px;
-  background: var(--secondary-hover-color);
-  color: var(--text-color);
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#initial-form button:hover {
-  background: var(--secondary-color);
 }
 
 #interview-container {
-  display: none;
-  flex-direction: column;
+  display: flex;
+  flex-direction: column-reverse; /* Messages from bottom to top */
+  height: calc(100vh - 150px); /* Adjust as needed */
+  overflow-y: auto;
   padding: 20px;
 }
 
 .chats-container {
+  width: 60%; /* Match the width of #answer-form */
+  margin: 0 auto; /* Center the container horizontally */
+  flex-grow: 1;
+  padding-bottom: 20px; /* Space for the input area */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 10px; /* Add spacing between chat messages */
+}
+
+.message {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  max-width: 80%; /* Ensure messages fit within the container */
+  word-break: break-word;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: rgba(128, 128, 128, 0.3); /* Dark gray transparent background */
+  margin-left: auto; /* Push user message to the right */
+  margin-right: 20px; /* Add slight offset from the right edge */
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: rgba(61, 90, 128, 0.3); /* Slightly different background for AI message */
+  margin-right: auto; /* Push bot message to the left */
+  margin-left: 20px; /* Add slight offset from the left edge */
 }
 
 #answer-form {
+  position: fixed; 
+  bottom: 20px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 60%; 
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #answer-form textarea {
-  width: 100%;
+  flex-grow: 1;
   padding: 10px;
-  border: 1px solid var(--placeholder-color);
+  border: none; 
   border-radius: 5px;
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   color: var(--text-color);
+  margin-right: 10px;
+  width: 60%; 
 }
 
 #answer-form button {
-  width: 100%;
-  padding: 10px;
-  background: var(--secondary-hover-color);
-  color: var(--text-color);
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
-
-#answer-form button:hover {
-  background: var(--secondary-color);
-}
-
-body.light-theme {
-  /* Light theme colors */
-  --text-color: #090c13;
-  --subheading-color: #7b8cae;
-  --placeholder-color: #606982;
-  --primary-color: #f3f7ff;
-  --secondary-color: #dce6f9;
-  --secondary-hover-color: #d2ddf2;
-}
-
-body {
-  color: var(--text-color);
-  background: var(--primary-color);
-}
-
-.container {
-  overflow-y: auto;
-  padding: 32px 0 60px;
-  height: calc(100vh - 127px);
-  scrollbar-color: var(--scrollbar-color) transparent;
-}
-

@@ -66,7 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 chatsContainer.appendChild(feedbackDiv);
                 currentQuestionIndex++;
                 document.getElementById('answer').value = ''; // Clear the answer field
-                displayQuestion();
+
+                // Display the next question IMMEDIATELY after receiving feedback
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    //All questions answered. Handle this appropriately (e.g., display a "Thank You" message)
+                    alert("Interview complete!")
+                }
+
             } else {
                 console.error('Error:', await response.text());
                 //Handle error
